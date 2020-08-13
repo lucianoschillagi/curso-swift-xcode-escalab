@@ -1,6 +1,6 @@
 import Foundation
 
-/* Tópicos:
+/* Tópicos vistos en Clase 3:
  
  -Operadores Lógicos
     -NOT
@@ -8,11 +8,10 @@ import Foundation
     -OR
  
  -Strings and Characters
-    -Recorriendo brevemente la documentación
     -Strings Literales
     -Strings Multilínea
     -Caracteres especiales en String Literals (Unicode)
-    -Extendiendo Strings
+    -Delimitadores Strings
     -Inicializando un String
     -Mutabilidad de un String
     -Los String son "Tipos de Valor" (Value Types)
@@ -20,93 +19,115 @@ import Foundation
     -Concatenando Strings y Caracteres
     -Interpolación de Strings
     -Unicode
-    -Contando Caracteres
-    -Accediendo y modificando un String
-    -Insertando y removiendo un Caracter o un Substring
-    -Sub-strings
-    -Comparando strings
-    -Sufijos y Prefijos en un String
-    -Representación Unicode de Strings
+ 
  */
+
+// Ejercicios sobre Clase 3 🤓
 
 /// Operadores Lógicos
 
-// Operador NOT (!)
-let allowedEntry = false
+/* Operador NOT (!) */
+let encendido: Bool = false
+// 1.Cambiar el valor de la constante "encendido" a "true" usando el operador NOT
+// ✍️
+let estaSoleado = true
+// 2.Cambiar el valor de la constante "estaSoleado" a "false" usando el operador NOT
+// ✍️
 
-if !allowedEntry {
-    print("ACCESS DENIED")
-}
-// Prints "ACCESS DENIED"
-
-// Operador AND (&&)
-let enteredDoorCode = true
-let passedRetinaScan = true
-
-if enteredDoorCode && passedRetinaScan {
-    print("Welcome!")
+// 3.En este condicional:
+// qué sentencia se ejecturá y porqué?
+if !estaSoleado {
+    print("Está nublado")
 } else {
-    print("ACCESS DENIED")
+    print("Está soleado")
 }
-// Prints "ACCESS DENIED"
 
-// Operador OR (||)
-let hasDoorKey = true
-let knowsOverridePassword = false
-let knowsSecretPassword = false
-if hasDoorKey || knowsOverridePassword || knowsSecretPassword  {
-    print("Welcome!")
-} else {
-    print("ACCESS DENIED")
+/* Operador AND (&&) */
+// 4.El valor de qué constante debería cambiar para que se cumpla la condición y se ejecute el print del condicional?
+let esDomingo = true
+let estaLloviendo = false
+
+if estaSoleado && estaLloviendo {
+    print("Dormir la siesta")
 }
-// Prints "Welcome!"
+
+// 5.TODO: Declarar dos constantes y un condicional que ejecute un print con un mensaje si ambas son ciertas
+// ✍️
+
+/* Operador OR (||) */
+// 6.TODO: Declarar dos constantes y un condicional que ejecute un print con un mensaje si alguna de las dos es cierta
+// ✍️
+
+// 7.TODO: Evaluar el estado de 3 constantes usando los operadores AND y OR
+// Ejemplo:
+let constanteUno: Bool = false
+let constanteDos: Bool = false
+let constanteTres: Bool = false
+
+if constanteUno && constanteDos || constanteTres {
+    print("Es cierto!")
+} else {
+    print("No es cierto")
+}
+
+// 8.Escribir ahora uno similar al anterior pero que ejecute la rama "true"
+//  ✍️
+
 
 /// Strings & Characters
-// String Literal
 
-// Special Characters in String Literals
-let wiseWords = "\"Imagination is more important than knowledge\" - Einstein"
-// "Imagination is more important than knowledge" - Einstein
-let dollarSign = "\u{24}"        // $,  Unicode scalar U+0024
-let blackHeart = "\u{2665}"      // ♥,  Unicode scalar U+2665
-let sparklingHeart = "\u{0393}" // 💖, Unicode scalar U+1F496
-let emoticon = "😛"
+//-Strings Literales
+//-Strings Multilínea
+//-Caracteres especiales en String Literals (Unicode)
+//-Delimitadores de Strings
+//-Inicializando un String
+//-Mutabilidad de un String
+//-Los String son "Tipos de Valor" (Value Types)
+//-Trabajando con Caracteres
+//-Concatenando Strings y Caracteres
+//-Interpolación de Strings
+//-Unicode
 
-print(wiseWords)
+// 9.Declarar 6 strings literales
+//  ✍️
 
-// Extended String Delimeters
-let threeMoreDoubleQuotationMarks = #"\t hola"#
-print(threeMoreDoubleQuotationMarks)
+// 10.Declarar 3 strings multilínea
+//  ✍️
 
-var emptyString: String = ""               // empty string literal
-var anotherEmptyString = String()  // initializer syntax
-// these two strings are both empty, and are equivalent to each other
+// 11. Investigar: ¿Cómo hacer para aplicar tabulación en un string multilínea?
+// Dar 2 ejemplos
+// Ref: https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html
 
-if emptyString.isEmpty {
-    print("Nothing to see here")
-}
+// 12. ¿Qué tipos de "caracteres especiales" podemos incluir dentro de un string literal? (son 2)
+// Dar 2 ejemplos de cada uno ✍️
+// Ref: https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html
 
+// 13.¿Para qué sirven los "delimitadores de strings"?
+// Dar 3 ejemplos de uso ✍️
 
-// Prints "Nothing to see here"
-var variableString: String = "Horse"
-variableString += " and carriage"
-print(variableString)
-// variableString is now "Horse and carriage"
+// 14.¿De qué dos formas podemos inicializar un string?
+// Dar 3 ejemplos de cada una de estas formas ✍️
 
-var constantString = "Highlander"
-constantString += " and another Highlander"
-// this reports a compile-time error - a constant string cannot be modified
+// 15.¿Mediante qué operador podemos concatenar un string con otro?
+// Dar 3 ejemplos ✍️
 
+// 16.¿Mediante qué mecanismo podemos acceder a cada uno de los miembros de un string? (es decir, a cada uno de los caracteres que lo conforman)
+// Usar este mecanismo recorriendo 2 strings diferentes ✍️
 
-for character in "Basketball" {
-    print(character)
-}
+// 17. Dar 3 ejemplos de cómo concatenar string y caracteres
+// ✍️
 
-// String Intepolation
-let multiplier = 3
-let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
-// message is "3 times 2.5 is 7.5"
-print(message)
+// 18. Dar 4 ejemplos de cómo interpolar un string
+// a) interpolándole una constante
+// b) interpolándole una variable
+// c) interpolándole una expresión
+// d) usando en la interpolación un delimitador
+// ✍️
 
-let miNombre = "Luciano"
-let miNombreCompleto = "\(miNombre) Schillagi"
+// 19. Invocar caracteres Unicode con la sintáxis "\u{CODIGO}"
+// Declarar 4 constantes que almacenen caracteres que no sean ni letras ni números. Imprimirlos en consola.
+// Ref: https://unicode-table.com/es/
+// Ejemplo:
+let precomposed: Character = "\u{D55C}"
+// ✍️
+
