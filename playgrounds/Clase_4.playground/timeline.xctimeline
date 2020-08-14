@@ -2,5 +2,10 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/Luko/Desktop/curso-swift-xcode/playgrounds/Clase_4.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=1460&amp;EndingColumnNumber=0&amp;EndingLineNumber=58&amp;StartingColumnNumber=0&amp;StartingLineNumber=58&amp;Timestamp=619140338.04088"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>
