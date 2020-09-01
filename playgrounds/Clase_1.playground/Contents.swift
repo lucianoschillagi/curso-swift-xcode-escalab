@@ -26,6 +26,7 @@ let miNombre: String = "Luciano"
 // 1.
 // a. Declarar una constante con tu número favorito con la sintáxis anterior.
 // b. Imprimir en consola el valor de la constante.
+let numeroFavorito = 9
 
 
 // 2.
