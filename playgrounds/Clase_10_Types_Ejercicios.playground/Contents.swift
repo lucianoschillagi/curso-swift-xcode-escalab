@@ -5,7 +5,7 @@ import Foundation
 // Ejercicios
 
 /* ****************************************************** */
-// 01. Identificar del Tipo (o "Type Indentifier")
+// 01. Identificar el Tipo (o "Type Indentifier")
 /* ****************************************************** */
 
 // ¿Cuál es el "Identificador" de estos Tipos?
