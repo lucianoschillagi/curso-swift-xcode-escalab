@@ -19,7 +19,7 @@ import Foundation
 /* ➡️ Las "extensiones" en Swift añaden nueva funcionalidad a una clase, estructura, enumeración o protocolo. Esto incluye la habilidad de extender tipos de los cuales no tienes acceso al código fuente original.
 */
 
-/* ➡️ En Swift puedes extender un protocolo para proveerle implementaciones a sus requerimientos o para añadir funcionalidad extra de la cual los tipos conformados puedan adquirir esa ventaja.
+/* ➡️ En Swift también puedes extender un protocolo para proveerle implementaciones a sus requerimientos o para añadir funcionalidad extra de la cual los tipos conformados puedan adquirir esa ventaja.
 */
 
 /* **************************************************************************** */
@@ -27,26 +27,25 @@ import Foundation
 /* **************************************************************************** */
 
 struct SomeType {
-    let uno = 1
-    // toda las definición aquí...
+    // la definición de la estructura va aquí
 }
 
 extension SomeType {
-    // new functionality to add to SomeType goes here
-    
-    
-    func miMetodoExtension() {
-        print("miMetodoExtension")
-    }
+    // la nueva funcionalidad para agregar a "SomeType" va aquí
 }
-
-let someType = SomeType()
-someType.miMetodoExtension()
-
 
 /* **************************************************************************** */
 // Compueted Properties
 /* **************************************************************************** */
+
+/*
+ Las extensiones pueden añadir propiedades computadas a los Tipos ya existentes.
+ En este ejemplo se le agregan cinco propiedades computadas de instancia al tipo 'Double'(*)
+ para proveerle un soporte básico para trabajar con unidades de distancia.
+ 
+ (*) Recordad que 'Double' es un tipo ya implementado desde la "Librería Estándar
+ de Swift". Es decir, es un Tipo "incorporado previamente en el lenguaje".
+*/
 
 extension Double {
     var km: Double { return self * 1_000.0 }
@@ -60,97 +59,66 @@ let distancia: Double = 30
 distancia.km
 distancia.ft
 
-extension String {
-    
-    func imprimirMiNombre() {
-        print("Luciano")
-    }
-    
-}
-let str: String = ""
-str.count
-
-
 /* **************************************************************************** */
 // Initializers
 /* **************************************************************************** */
 
+/*
+ Las extensiones pueden añadir nuevos inicializadores a los Tipos existentes.
+ Esto nos permite extender otros tipos para que acepten tus propios parámetros de
+ inicialización, o para proveer inicializaciones adicionales como opción a las
+ implementaciones originales del tipo.
+*/
 
-/* **************************************************************************** */
-// Methods
-/* **************************************************************************** */
+// Un ejemplo:
+// Definimos una estructura llamada 'Size'
+// que contiene dos propiedades, 'width' y 'height'
+// (esta estructura representa un tamaño)
+struct Size {
+    var width = 0.0, height = 0.0
+}
 
-extension Int {
-    func repetitions(task: () -> Void) {
-        for _ in 0..<self {
-            task()
-        }
+// Definimos una estructura llamada 'Point'
+// que contiene dos propiedades, 'x' y 'y'
+// (esta estructura representa un punto en una posición determinada)
+struct Point {
+    var x = 0.0, y = 0.0
+}
+
+// Y ahora definimos una estructura llamada 'Rect'
+// que contiene dos propiedades, 'origin' y 'size'
+// (esta estructura representa un rectángulo con un tamaño y un punto de origen)
+struct Rect {
+    var origin = Point()
+    var size = Size()
+}
+
+// Debido a que 'Rect' es una estructura que provee valores por defecto a todas sus propiedades, este tipo recibe un inicializador por defecto (a) y también un inicializador para inicializar los valores de sus propiedades al instanciar la estructura (b).
+
+// a. Inicializador por defecto
+let defaultRect = Rect()
+
+// b. Inicializador de sus miembros
+let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0), size: Size(width: 5.0, height: 5.0))
+
+// Con las extensiones podemos extender la estructura 'Rect' para proveerle un inicializador ADICIONAL que tome un tamaño específico y un punto en el medio del tamaño. Es decir, podemos proveerle un inicializador personalizado.
+
+// Extendemos la estructura 'Rect'
+extension Rect {
+    // Le agregamos el inicializador personalizado
+    // para que cuando se instancie esta la estructura 'Rect'
+    // se configure automáticamente un rectángulo de cualquier tamaño
+    // con un punto en su exacto medio.
+    init(center: Point, size: Size) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: Point(x: originX, y: originY), size: size)
     }
 }
 
-10.repetitions {
-    print("Hello!")
-}
-
-/* **************************************************************************** */
-// Subscripts
-/* **************************************************************************** */
-
-extension Int {
-    subscript(digitIndex: Int) -> Int {
-        var decimalBase = 1
-        for _ in 0..<digitIndex {
-            decimalBase *= 10
-        }
-        return (self / decimalBase) % 10
-    }
-}
-746381295[0]
-// returns 5
-746381295[1]
-// returns 9
-746381295[2]
-// returns 2
-746381295[8]
-// returns 7
-
-
-/* **************************************************************************** */
-// Nested Types
-/* **************************************************************************** */
-
-extension Int {
-    
-    enum Kind {
-        case negative, zero, positive
-    }
-    
-    var kind: Kind {
-        switch self {
-        case 0:
-            return .zero
-        case let x where x > 0:
-            return .positive
-        default:
-            return .negative
-        }
-    }
-}
-
-func printIntegerKinds(_ numbers: [Int]) {
-    for number in numbers {
-        switch number.kind {
-        case .negative:
-            print("- ", terminator: "")
-        case .zero:
-            print("0 ", terminator: "")
-        case .positive:
-            print("+ ", terminator: "")
-        }
-    }
-    print("")
-}
-
-printIntegerKinds([3, 19, -27, 0, -6, 0, 7])
+// Ahora instanciamos 'Rect' y usamos este nuevo inicializador creado
+// en la extensión
+let centerRect = Rect(center: Point(x: 0.0, y: 0.0),
+                      size: Size(width: 3.0, height: 3.0))
 
 
